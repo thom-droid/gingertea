@@ -1,0 +1,9 @@
+server:
+  port: 8070
+spring:
+  profiles:
+    group:
+      local:
+        - local
+      test:
+        - test
