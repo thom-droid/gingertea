@@ -1,33 +1,41 @@
 package com.thom.gingertea.domain.user.entity;
 
-import com.thom.gingertea.domain.user.dto.UserRequest;
+import com.thom.gingertea.common.role.Role;
+import com.thom.gingertea.common.role.UserRole;
+import com.thom.gingertea.config.audit.Auditing;
 import com.thom.gingertea.domain.user.dto.UserResponse;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
 @Getter
 @Setter
 @Entity
-public class User {
+public class User extends Auditing implements UserRole {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
+
     private String password;
+
     private String email;
+
     private String nickname;
+
     private String img;
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.CUSTOMER;
+
+    @Override
+    public String getRoleName() {
+        return this.role.getRoleName();
+    }
 
     public void update(User request) {
         this.nickname = request.getNickname();
