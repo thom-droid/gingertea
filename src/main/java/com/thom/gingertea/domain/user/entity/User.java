@@ -30,6 +30,7 @@ public class User extends Auditing implements UserRole {
     private String img;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Role role = Role.CUSTOMER;
 
     @Override
