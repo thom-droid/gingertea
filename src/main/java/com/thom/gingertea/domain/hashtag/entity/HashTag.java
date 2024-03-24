@@ -1,9 +1,17 @@
 package com.thom.gingertea.domain.hashtag.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.thom.gingertea.domain.product.entity.Product;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 public class HashTag {
 
@@ -12,5 +20,12 @@ public class HashTag {
     private Long id;
 
     private String hashTagName;
+
+    @ManyToMany
+    @JoinTable(name = "PRODUCT_HASTAG",
+            joinColumns = @JoinColumn(name = "HASHTAG_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    @Builder.Default
+    private List<Product> products = new ArrayList<>();
 
 }
