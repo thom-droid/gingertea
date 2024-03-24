@@ -34,4 +34,5 @@ public class ProductImage extends Auditing {
     @JoinColumn(name = "product_id")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Product product;
+
 }

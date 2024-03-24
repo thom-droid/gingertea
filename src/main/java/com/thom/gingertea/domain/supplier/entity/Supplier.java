@@ -3,6 +3,7 @@ package com.thom.gingertea.domain.supplier.entity;
 import com.thom.gingertea.common.role.Role;
 import com.thom.gingertea.common.role.UserRole;
 import com.thom.gingertea.domain.product.entity.Product;
+import com.thom.gingertea.domain.supplier.dto.SupplierResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,5 +44,14 @@ public class Supplier implements UserRole {
 
     @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
+
+    public SupplierResponse.SupplierDetail toDetailResponse() {
+        return SupplierResponse.SupplierDetail.builder()
+                .id(id)
+                .username(username)
+                .companyName(companyName)
+                .contact(supplierContact)
+                .build();
+    }
 
 }

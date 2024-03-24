@@ -17,4 +17,16 @@ public class CustomBusinessExceptionCode {
         private final String code;
         private final String message;
     }
+
+    @Getter
+    @RequiredArgsConstructor
+    public enum Supplier implements CustomBusinessException {
+        NO_SUCH_SUPPLIER("-0005", "no supplier found."),
+        DUPLICATED_SUPPLIER_NAME("-0006", "supplier name is already being used."),
+        NOT_QUALIFIED_BUSINESS_NUMBER("-0007", "business number is not qualified."),
+        ;
+
+        private final String code;
+        private final String message;
+    }
 }
